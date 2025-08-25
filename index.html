@@ -73,6 +73,11 @@ responseDiv.innerText = data.text || "Keine Antwort erhalten.";
 responseDiv.innerText = "Fehler bei der Anfrage.";
 }
 }
+  const res = await fetch("https://food-explorer.onrender.com/api/chat", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ prompt })
+});
 </script>
 </body>
 </html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+.roadmap li { background:#fff; margin:15px 0; padding:20px; border-left:5px solid #ff7043; border-radius:6px; box-shadow:0 2px 4px rgba(0,0,0,0.1); }
+footer { text-align:center; padding:20px; background:#333; color:#fff; margin-top:40px; }
+footer a { color:#ff7043; text-decoration:none; }
+.chatbox { background:#fff; padding:20px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); margin-top:40px; }
+.chatbox textarea { width:100%; height:100px; padding:10px; border:1px solid #ccc; border-radius:6px; resize:none; }
+.chatbox button { margin-top:10px; padding:10px 20px; background:#ff7043; color:#fff; border:none; border-radius:6px; cursor:pointer; font-size:1em; }
+.chatbox button:hover { background:#e85c2f; }
+.response { margin-top:20px; padding:15px; background:#f9f9f9; border-left:4px solid #ff7043; border-radius:6px; white-space:pre-wrap; }
+</style>
+</head>
+<body>
+<header>
+<h1>FoodExplorerAI</h1>
+<p>Begib dich auf eine kulinarische Reise rund um die Welt 🌍🍴</p>
+</header>
+
+
+<section>
+<h2>Unsere Vision</h2>
+<p>Menschen weltweit zu inspirieren und miteinander zu verbinden, indem wir vielfältige Küchen entdecken, einzigartige Rezepte teilen und eine Gemeinschaft von kulinarischen Abenteurern fördern.</p>
+</section>
+
+
+<section>
+<h2>Unsere Mission</h2>
+<p>Food Explorer möchte eine Plattform schaffen, um kulinarische Traditionen aus aller Welt zu entdecken und zu feiern. Wir unterstützen Hobbyköche und Genießer mit innovativen Rezepten, Kochtipps und kulturellen Einblicken, damit Kochen für alle zu einer bereichernden Erfahrung wird.</p>
+</section>
+
+
+<section class="roadmap">
+<h2>Zukünftige Roadmap</h2>
+<ul>
+<li><strong>Rezept-Innovation:</strong> Laufend neue Rezepte entwickeln, die Tradition und moderne Einflüsse verbinden.</li>
+<li><strong>Community:</strong> Eine lebendige Gemeinschaft aufbauen, in der sich Foodies austauschen und inspirieren.</li>
+<li><strong>Kulinarische Bildung:</strong> Workshops, Tutorials und Online-Kurse anbieten.</li>
+<li><strong>Nachhaltigkeit:</strong> Regionale Zutaten hervorheben, Food Waste reduzieren und bewusstes Essen fördern.</li>
+<li><strong>Globale Food-Touren:</strong> Virtuelle und echte kulinarische Reisen organisieren, um Kulturen durch Essen zu erleben.</li>
+</ul>
+</section>
+
+
+<section class="chatbox">
+<h2>Frag den Food Explorer (KI)</h2>
+<textarea id="prompt" placeholder="Frag mich nach einem Rezept, Kochtipp oder kulinarischen Funfact..."></textarea>
+<button onclick="askAI()">Absenden</button>
+<div id="response" class="response" style="display:none;"></div>
+</section>
+
+
+<footer>
+<p>Gemeinsam feiern wir die Kunst des Kochens und die Freude des Teilens.<br>© 2025 Food Explorer | <a href="#">Werde Teil der Reise</a></p>
+</footer>
+
+
+<script>
+async function askAI() {
+const prompt = document.getElementById('prompt').value;
+const responseDiv = document.getElementById('response');
+responseDiv.style.display = "block";
+responseDiv.innerText = "Lade Antwort...";
+
+
+try {
+const res = await fetch("/api/chat", {
+method: "POST",
+headers: { "Content-Type": "application/json" },
+body: JSON.stringify({ prompt })
+});
+const data = await res.json();
+responseDiv.innerText = data.text || "Keine Antwort erhalten.";
+} catch (err) {
+responseDiv.innerText = "Fehler bei der Anfrage.";
+}
+}
+</script>
+</body>
+</html>
